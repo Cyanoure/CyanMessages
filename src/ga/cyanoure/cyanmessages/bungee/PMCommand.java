@@ -1,4 +1,4 @@
-package ga.cyanoure.cyanmessages;
+package ga.cyanoure.cyanmessages.bungee;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -25,7 +25,7 @@ public class PMCommand extends Command{
 				
 			this.plugin.pm.sendMessage(from, to, msg);
 		}else {
-			from.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cHasználat: /m <játékosnév> <üzenet>"));
+			from.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("command-usage").replace("<usage>", "/m <"+this.plugin.lang.GetText("player")+"> <"+this.plugin.lang.GetText("message")+">")));
 		}
 	}
 }

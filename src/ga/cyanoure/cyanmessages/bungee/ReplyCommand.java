@@ -1,4 +1,4 @@
-package ga.cyanoure.cyanmessages;
+package ga.cyanoure.cyanmessages.bungee;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -24,7 +24,7 @@ public class ReplyCommand extends Command{
 				
 			this.plugin.pm.replyMessage(from, msg);
 		}else {
-			from.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cHasználat: /r <üzenet>"));
+			from.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("command-usage").replace("<usage>", "/r <"+this.plugin.lang.GetText("message")+">")));
 		}
 	}
 }

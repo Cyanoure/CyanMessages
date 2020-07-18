@@ -1,0 +1,14 @@
+name: CyanMessages
+main: ga.cyanoure.cyanmessages.bungee.Main
+version: 1.2
+author: Cyanoure
+website: https://www.cyanoure.ga/
+permissions:
+    cyanmessages.private:
+        default: true
+    cyanmessages.helpop.send:
+        default: true
+    cyanmessages.helpop.receive:
+        default: false
+    cyanmessages.reload:
+        default: false

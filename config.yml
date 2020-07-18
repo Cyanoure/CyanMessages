@@ -1,0 +1,5 @@
+prefix: "&8[&3CyanMessages&8] &3"
+language: "en" # Supported languages in v1.2: hu, en
+pm-format: "&8[&6<sender> &3»&6 <receiver>&8] &7<message>"
+pm-format-console: "&8[&7[<sender_server>] &6<sender> &3» &7[<receiver_server>] &6<receiver>&8] &7<message>"
+helpop-format: "&4&lHelpOP &c» &6<server> &c» &6<sender> &3» &7<message>"

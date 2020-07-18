@@ -1,4 +1,4 @@
-package ga.cyanoure.cyanmessages;
+package ga.cyanoure.cyanmessages.bungee;
 
 import java.util.Collection;
 
@@ -24,7 +24,9 @@ public class HelpopCommand extends Command{
 			}
 			msg = msg.trim();
 			
-			String message = "&4&lHelpOP &c» &6"+from.getServer().getInfo().getName()+" &c» &6"+from.getName()+" &3» &7"+msg;
+			//String message = "&4&lHelpOP &c» &6"+from.getServer().getInfo().getName()+" &c» &6"+from.getName()+" &3» &7"+msg;
+			String message = this.plugin.config.getString("helpop-format").replace("<server>", from.getServer().getInfo().getName()).replace("<sender>", from.getName()).replace("<message>", msg);
+			
 			this.plugin.simpleMessage(message);
 			Collection<ProxiedPlayer> players = plugin.getProxy().getPlayers();
 			for(ProxiedPlayer item : players) {
@@ -34,7 +36,7 @@ public class HelpopCommand extends Command{
 				}
 			}
 		}else {
-			from.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cHasználat: /helpop <üzenet>"));
+			from.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("command-usage").replace("<usage>", "/helpop <"+this.plugin.lang.GetText("message")+">")));
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package ga.cyanoure.cyanmessages;
+package ga.cyanoure.cyanmessages.bungee;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -17,10 +17,10 @@ public class ToggleCommand extends Command{
 		ProxiedPlayer p = (ProxiedPlayer)sender;
 		if(plugin.pm.DisabledList.contains(p.getUniqueId())) {
 			plugin.pm.DisabledList.remove(plugin.pm.DisabledList.indexOf(p.getUniqueId()));
-			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&2Privát üzenetek bekapcsolva."));
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("pm-enabled")));
 		}else {
 			plugin.pm.DisabledList.add(p.getUniqueId());
-			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cPrivát üzenetek kikapcsolva."));
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("pm-disabled")));
 		}
 	}
 }

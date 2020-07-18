@@ -1,4 +1,4 @@
-package ga.cyanoure.cyanmessages;
+package ga.cyanoure.cyanmessages.bungee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,12 +24,16 @@ public class PrivateMessages {
 					if(!DisabledList.contains(to.getUniqueId()) && to.hasPermission("cyanmessages.private")) {
 						String SenderName = from.getName();
 						String ReceiverName = to.getName();
-						String msg1 = "&8[&cÉn &3»&6 "+ReceiverName+"&8] &7"+message;
-						String msg2 = "&8[&6"+SenderName+" &3»&c Én&8] &7"+message;
+						//String msg1 = "&8[&cÉn &3»&6 "+ReceiverName+"&8] &7"+message;
+						//String msg2 = "&8[&6"+SenderName+" &3»&c Én&8] &7"+message;
+						
+						String msg1 = this.plugin.config.getString("pm-format").replace("<sender>", this.plugin.lang.GetText("me")).replace("<receiver>", ReceiverName).replace("<message>", message);
+						String msg2 = this.plugin.config.getString("pm-format").replace("<receiver>", this.plugin.lang.GetText("me")).replace("<sender>", SenderName).replace("<message>", message);
 						
 						from.sendMessage(ChatColor.translateAlternateColorCodes('&', msg1));
 						to.sendMessage(ChatColor.translateAlternateColorCodes('&', msg2));
-						this.plugin.simpleMessage("&8[&7["+from.getServer().getInfo().getName()+"] &6"+SenderName+" &3» &7["+to.getServer().getInfo().getName()+"] &6"+ReceiverName+"&8] &7"+message);
+						//this.plugin.simpleMessage("&8[&7["+from.getServer().getInfo().getName()+"] &6"+SenderName+" &3» &7["+to.getServer().getInfo().getName()+"] &6"+ReceiverName+"&8] &7"+message);
+						this.plugin.simpleMessage(this.plugin.config.getString("pm-format-console").replace("<sender_server>", from.getServer().getInfo().getName()).replace("<receiver_server>", to.getServer().getInfo().getName()).replace("<sender>", from.getName()).replace("<receiver>", to.getName()).replace("<message>", message));
 						
 						if(replies.containsKey(from.getUniqueId())) {
 							replies.remove(from.getUniqueId());
@@ -40,19 +44,19 @@ public class PrivateMessages {
 						replies.put(from.getUniqueId(), to.getUniqueId());
 						replies.put(to.getUniqueId(), from.getUniqueId());
 					}else {
-						from.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cA játékosnak ki vannak kapcsolva a privát üzenetei!"));
+						from.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("pm-receiver-disabled")));
 					}
 				}else {
-					from.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cMagadnak nem küldhetsz üzenetet!"));
+					from.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("pm-msg-self")));
 				}
 			}else {
 				if(replies.containsKey(from.getUniqueId())) {
 					replies.remove(from.getUniqueId());
 				}
-				from.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cA játékos nem található!"));
+				from.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("player-offline")));
 			}
 		}else {
-			from.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNem tudsz üzenetet küldeni, ha ki vannak kapcsolva a privát üzeneteid!"));
+			from.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.lang.GetText("pm-sender-disabled")));
 		}
 	}
 	
