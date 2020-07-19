@@ -34,18 +34,21 @@ public class Language {
 		if(!f.exists()) {
 			try (InputStream in = Plugin.getResourceAsStream("lang/"+LangCode+".yml")){
 				if(in != null) {
-					Files.copy(in, f.toPath());
+					//Files.copy(in, f.toPath());
+					LangConfig = ConfigurationProvider.getProvider(YamlConfiguration.class).load(in);
+				}else {
+					Plugin.logMSG("&4ERROR! Language file not found. ("+LangCode+".yml)");
 				}
 			}catch(IOException e) {
 				e.printStackTrace();
 			}
-		}
-		
-		try {
-			LangConfig = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(Plugin.getDataFolder(), "lang/"+LangCode+".yml"));
-		} catch (IOException e) {
-			Plugin.logMSG("&4ERROR!");
-			e.printStackTrace();
+		}else {
+			try {
+				LangConfig = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(Plugin.getDataFolder(), "lang/"+LangCode+".yml"));
+			} catch (IOException e) {
+				Plugin.logMSG("&4ERROR!");
+				e.printStackTrace();
+			}
 		}
 	}
 	
